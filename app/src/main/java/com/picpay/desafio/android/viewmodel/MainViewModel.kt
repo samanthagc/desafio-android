@@ -1,5 +1,6 @@
 package com.picpay.desafio.android.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,16 +11,19 @@ import com.picpay.desafio.android.data.response.UsersResult
 
 class MainViewModel(private val dataSource: PicPayDataSource) : ViewModel() {
 
-    val usersLiveData: MutableLiveData<List<User>> = MutableLiveData()
-    val errorLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val userList: MutableLiveData<List<User>> = MutableLiveData()
+    private val errorMessage: MutableLiveData<Int> = MutableLiveData()
+
+    val usersLiveData: LiveData<List<User>> = userList
+    val errorLiveData: LiveData<Int> = errorMessage
 
     fun getUsers() {
         dataSource.getUsers { result: UsersResult ->
             when (result) {
                 is UsersResult.Success ->
-                    usersLiveData.value = result.users
+                    userList.value = result.users
                 is UsersResult.ServerError ->
-                    errorLiveData.value = R.string.error
+                    errorMessage.value = R.string.error
             }
         }
     }
