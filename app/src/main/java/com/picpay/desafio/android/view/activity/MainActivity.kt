@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val progressBar: ProgressBar by lazy {
-        findViewById(R.id.user_list_progress_bar)
+        findViewById<ProgressBar>(R.id.user_list_progress_bar)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

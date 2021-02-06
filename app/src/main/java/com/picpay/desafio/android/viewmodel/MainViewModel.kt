@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.data.model.User
 import com.picpay.desafio.android.data.repository.PicPayDataSource
+import com.picpay.desafio.android.data.repository.PicPayRepository
 import com.picpay.desafio.android.data.response.UsersResult
 
-class MainViewModel(private val dataSource: PicPayDataSource) : ViewModel() {
+class MainViewModel(private val dataSource: PicPayRepository) : ViewModel() {
 
     private val userList: MutableLiveData<List<User>> = MutableLiveData()
     private val errorMessage: MutableLiveData<Int> = MutableLiveData()
